@@ -43,5 +43,7 @@ This currently only supports lowercase text in the latin alphabet without number
 
 ## TODO
 
-- Add functionality for converting `Vec<u8>` to cat.
-- Add more bases - adaptable base option?
+- Add functionality for converting `Vec<u8>` to catspeak.
+- Add more bases - any base option?
+- Make `core::{cat_to_num, num_to_cat}` usage consistent with each other
+- Improve CLI
