@@ -18,23 +18,29 @@ fn main() {
             stdin.read_line(&mut input).unwrap();
             println!(
                 "{}",
-                core::cat_to_num(
-                    input.trim().to_string().split(" ").into_iter().map(|item| item.to_string()).collect(),
-                    base4::alphabet(),
-                    base4::char_length()
-                )
-            )
-        } else if trimmed == "2".to_string() {
-            input = "".to_string();
-            stdin.read_line(&mut input).unwrap();
-            println!(
-                "{}",
                 core::num_to_cat(
                     input.trim().parse().unwrap(),
                     base4::alphabet(),
                     base4::char_length()
                 )
-            )
+            );
+        } else if trimmed == "2".to_string() {
+            input = "".to_string();
+            stdin.read_line(&mut input).unwrap();
+            println!(
+                "{}",
+                core::cat_to_num(
+                    input
+                        .trim()
+                        .to_string()
+                        .split(" ")
+                        .into_iter()
+                        .map(|item| item.to_string())
+                        .collect(),
+                    base4::alphabet(),
+                    base4::char_length()
+                )
+            );
         } else {
             println!("Invalid input, exiting...");
             break;
