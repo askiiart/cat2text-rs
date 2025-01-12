@@ -1,0 +1,16 @@
+[package]
+name = "cat2text"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+repository = "https://git.askiiart.net/askiiart/cat2text-rs"
+
+[lib]
+name = "cat2text"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cat2text"
+path = "src/main.rs"
+
+[dependencies]
