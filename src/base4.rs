@@ -43,10 +43,10 @@ pub fn encode(text: String) -> String {
 }
 
 /// Decodes base 4 catspeak to english text
-/// 
+///
 /// ```
 /// use cat2text::base4::decode;
-/// 
+///
 /// assert_eq!("i love cats", decode("meow mreow mrrp; meow mrow meow meow mrow mrow mrrp mrrp mreow meow mrrp mrrp; meow meow mrow meow meow mrrp mrrp mrrp meow mrrp meow mrow".to_string()));
 /// ```
 pub fn decode(text: String) -> String {
@@ -59,8 +59,17 @@ pub fn decode(text: String) -> String {
     for engl_word in catspeak_words {
         let mut word = "".to_string();
         for engl_letter in core::split_every_3(engl_word) {
-            let char_num = core::cat_to_num(engl_letter.split(" ").map(|item| item.to_string()).collect(), alphabet(), char_length());
-            word += String::from_utf8(vec![(char_num + 96) as u8]).unwrap().as_str();
+            let char_num = core::cat_to_num(
+                engl_letter
+                    .split(" ")
+                    .map(|item| item.to_string())
+                    .collect(),
+                alphabet(),
+                char_length(),
+            );
+            word += String::from_utf8(vec![(char_num + 96) as u8])
+                .unwrap()
+                .as_str();
         }
         word += " ";
         output += word.as_str();

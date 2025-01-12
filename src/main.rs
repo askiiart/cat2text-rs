@@ -16,20 +16,11 @@ fn main() {
         if trimmed == "1".to_string() {
             input = "".to_string();
             stdin.read_line(&mut input).unwrap();
-            println!(
-                "{}",
-                base4::decode(
-                    input.trim().to_string()
-                    )
-            );
+            println!("{}", base4::decode(input.trim().to_string()));
         } else if trimmed == "2".to_string() {
             input = "".to_string();
             stdin.read_line(&mut input).unwrap();
-            println!(
-                "{}",
-                base4::encode(input.trim().to_string())
-                
-            );
+            println!("{}", base4::encode(input.trim().to_string()));
         } else {
             println!("Invalid input, exiting...");
             break;
