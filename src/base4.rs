@@ -1,3 +1,5 @@
+use crate::core;
+
 pub fn alphabet() -> Vec<String> {
     return vec!["meow", "mrrp", "mreow", "mrow"]
         .into_iter()
@@ -10,8 +12,7 @@ pub fn char_length() -> u32 {
     return 3;
 }
 
-// TODO: Add uppercase support, maybe possible?
-pub fn encode(text: String) {
+pub fn encode(text: String) -> String {
     // makes it lowercase and split by spaces
     let words: Vec<String> = text
         .to_ascii_lowercase()
@@ -24,6 +25,16 @@ pub fn encode(text: String) {
         words_as_bytes.push(word.as_bytes().into_iter().map(|item| item - 96).collect());
     }
 
-    let translation: String = "".to_string();
-    for word in words_as_bytes {}
+    let mut results: Vec<Vec<String>> = Vec::new();
+    for i in 0..words_as_bytes.len() {
+        results.push(Vec::new());
+        for j in 0..words_as_bytes[i].len() {
+            results[i].push(core::num_to_cat(words_as_bytes[i][j] as u32, alphabet(), char_length()));
+        }
+    }
+
+    let results: Vec<String> = results.into_iter().map(|item| item.join(" ")).collect();
+    let results = results.join("; ");
+    return results;
+
 }

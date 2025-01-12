@@ -1,9 +1,5 @@
 //! Handles conversion one word at a time for any base
 // based off this SO answer: https://stackoverflow.com/a/1119769
-use std::ops::Index;
-
-use crate::base4::alphabet;
-
 pub fn num_to_cat(num: u32, alphabet: Vec<String>, char_length: u32) -> String {
     let mut num: u32 = num.clone();
     let base: u32 = alphabet.len() as u32;
@@ -16,16 +12,12 @@ pub fn num_to_cat(num: u32, alphabet: Vec<String>, char_length: u32) -> String {
     }
     nums.reverse();
 
-    let mut result = "".to_string();
-    for i in nums.clone() {
-        result += alphabet[i as usize].as_str();
-        // put a space in between if it's not the last one
-        if i != nums.len() as u32 - 1 {
-            result += " "
-        }
+    let mut result: Vec<String> = Vec::new();
+    for item in nums {
+        result.push(alphabet[item as usize].clone());
     }
 
-    return result;
+    return result.join(" ");
 }
 
 /// Converts catspeak to a [`u32`]

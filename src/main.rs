@@ -29,17 +29,8 @@ fn main() {
             stdin.read_line(&mut input).unwrap();
             println!(
                 "{}",
-                core::cat_to_num(
-                    input
-                        .trim()
-                        .to_string()
-                        .split(" ")
-                        .into_iter()
-                        .map(|item| item.to_string())
-                        .collect(),
-                    base4::alphabet(),
-                    base4::char_length()
-                )
+                base4::encode(input.trim().to_string())
+                
             );
         } else {
             println!("Invalid input, exiting...");
