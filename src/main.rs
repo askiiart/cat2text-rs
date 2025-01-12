@@ -18,11 +18,9 @@ fn main() {
             stdin.read_line(&mut input).unwrap();
             println!(
                 "{}",
-                core::num_to_cat(
-                    input.trim().parse().unwrap(),
-                    base4::alphabet(),
-                    base4::char_length()
-                )
+                base4::decode(
+                    input.trim().to_string()
+                    )
             );
         } else if trimmed == "2".to_string() {
             input = "".to_string();
