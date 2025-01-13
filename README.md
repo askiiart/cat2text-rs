@@ -37,13 +37,30 @@ Separating out the letters and words:
 > ]
 > ]
 
+## Usage
+
+To use the library, just import the relevant functions, and run it like this:
+
+```rust
+use cat2text::base4::{encode, decode};
+
+let encoded = encode("i love cats".to_string());
+assert_eq!(encoded, "meow mreow mrrp; meow mrow meow meow mrow mrow mrrp mrrp mreow meow mrrp mrrp; meow meow mrow meow meow mrrp mrrp mrrp meow mrrp meow mrow");
+let decoded = decode(encoded);
+assert_eq!(decoded, "i love cats");
+```
+
+### Binary usage
+
+TODO
+
 ## Limitations
 
 This currently only supports lowercase text in the latin alphabet without numbers or anything - however, using `cat2text::core`, you can convert anything to meows, as long as you can put it in integers - which, you can.
 
 ## TODO
 
-- Add functionality for converting `Vec<u8>` to catspeak.
 - Add more bases - any base option?
 - Make `core::{cat_to_num, num_to_cat}` usage consistent with each other
 - Improve CLI
+- Add error handling

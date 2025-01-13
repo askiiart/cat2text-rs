@@ -13,6 +13,7 @@ pub fn num_to_cat(num: u32, alphabet: Vec<String>, char_length: u32) -> String {
     let base: u32 = alphabet.len() as u32;
 
     // base*n*-ifying logic
+    // FIXME: With base 10 this loops 100 times? see `anybase::test_anybase_encode()`
     let mut nums: Vec<u32> = Vec::new();
     while (nums.len() as u32) < char_length {
         nums.push((num as u32) % base);
@@ -74,9 +75,10 @@ pub fn split_every_x(text: String, x: usize) -> Vec<String> {
             output.push(String::new())
         }
         output[i / x] += tmp[i].as_str();
-        if i % x != 2 {
-            output[i / x] += " ";
-        }
+        output[i / x] += " ";
     }
+
+    // trim everything before sending it back
+    output = output.into_iter().map(|item| item.trim().to_string()).collect();
     return output;
 }

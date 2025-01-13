@@ -17,7 +17,7 @@ pub fn char_length() -> u32 {
 /// ```
 /// use cat2text::base4::encode;
 /// 
-/// assert_eq!("meow mreow mrrp; meow mrow meow meow mrow mrow mrrp mrrp mreow meow mrrp mrrp; meow meow mrow meow meow mrrp mrrp mrrp meow mrrp meow mrow", encode("i love cats".to_string().))
+/// assert_eq!("meow mreow mrrp; meow mrow meow meow mrow mrow mrrp mrrp mreow meow mrrp mrrp; meow meow mrow meow meow mrrp mrrp mrrp meow mrrp meow mrow", encode("i love cats".to_string()))
 /// ```
 pub fn encode(text: String) -> String {
     // makes it lowercase and split by spaces
