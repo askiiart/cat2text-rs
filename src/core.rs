@@ -58,24 +58,24 @@ pub fn cat_to_num(text: Vec<String>, alphabet: Vec<String>, char_length: u32) ->
     return num;
 }
 
-/// Splits a cat word into every 3 segments
+/// Splits a cat word into every x segments
 ///
 /// ```
-/// use cat2text::core::split_every_3;
+/// use cat2text::core::split_every_x;
 ///
-/// assert_eq!(vec!["meow meow mrrp".to_string(), "meow mreow mrrp".to_string(), "mreow meow mrrp".to_string()], split_every_3("meow meow mrrp meow mreow mrrp mreow meow mrrp".to_string()));
+/// assert_eq!(vec!["meow meow mrrp".to_string(), "meow mreow mrrp".to_string(), "mreow meow mrrp".to_string()], split_every_x("meow meow mrrp meow mreow mrrp mreow meow mrrp".to_string(), 3));
 /// ```
-pub fn split_every_3(text: String) -> Vec<String> {
+pub fn split_every_x(text: String, x: usize) -> Vec<String> {
     let delim = " ";
     let tmp: Vec<String> = text.split(delim).map(|item| item.to_string()).collect();
     let mut output: Vec<String> = Vec::new();
     for i in 0..tmp.len() {
-        if i % 3 == 0 {
+        if i % x == 0 {
             output.push(String::new())
         }
-        output[i / 3] += tmp[i].as_str();
-        if i % 3 != 2 {
-            output[i / 3] += " ";
+        output[i / x] += tmp[i].as_str();
+        if i % x != 2 {
+            output[i / x] += " ";
         }
     }
     return output;

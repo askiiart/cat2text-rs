@@ -12,6 +12,13 @@ pub fn char_length() -> u32 {
     return 3;
 }
 
+/// Encodes english text into base 4 catspeak
+/// 
+/// ```
+/// use cat2text::base4::encode;
+/// 
+/// assert_eq!("meow mreow mrrp; meow mrow meow meow mrow mrow mrrp mrrp mreow meow mrrp mrrp; meow meow mrow meow meow mrrp mrrp mrrp meow mrrp meow mrow", encode("i love cats".to_string().))
+/// ```
 pub fn encode(text: String) -> String {
     // makes it lowercase and split by spaces
     let words: Vec<String> = text
@@ -58,7 +65,7 @@ pub fn decode(text: String) -> String {
     let mut output: String = String::new();
     for engl_word in catspeak_words {
         let mut word = "".to_string();
-        for engl_letter in core::split_every_3(engl_word) {
+        for engl_letter in core::split_every_x(engl_word, 3) {
             let char_num = core::cat_to_num(
                 engl_letter
                     .split(" ")
