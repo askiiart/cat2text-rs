@@ -1,6 +1,6 @@
 extern crate cat2text;
-use cat2text::{base4, core};
-use std::{io::{self, stdout, Write}, process::exit};
+use cat2text::base4;
+use std::io::{self, stdout, Write};
 
 fn main() {
     let stdin = io::stdin();
