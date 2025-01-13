@@ -1,10 +1,10 @@
 extern crate cat2text;
 use cat2text::{base4, core};
-use std::{io, process::exit};
+use std::{io::{self, stdout, Write}, process::exit};
 
 fn main() {
     let stdin = io::stdin();
-    let mut input = String::new();
+    let mut input;
 
     loop {
         println!("Pick your translation:");
@@ -12,6 +12,8 @@ fn main() {
         println!("2) text to cat");
         input = "".to_string();
         stdin.read_line(&mut input).unwrap();
+        print!("~> ");
+        stdout().flush().unwrap();
         let trimmed = input.trim();
         if trimmed == "1".to_string() {
             input = "".to_string();
