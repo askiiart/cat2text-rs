@@ -1,5 +1,3 @@
-use std::ops::Deref;
-
 use crate::core;
 
 pub fn alphabet() -> Vec<String> {
