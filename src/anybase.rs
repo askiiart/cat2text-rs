@@ -15,6 +15,13 @@ pub fn max_base() -> u32 {
 }
 
 /// Returns the minimum catspeak words per character needed for this base
+/// 
+/// ```
+/// use cat2text::anybase::char_length;
+/// 
+/// let base = 10;
+/// assert_eq!(char_length(base), 2)
+/// ```
 pub fn char_length(base: u32) -> u32 {
     for i in 1..base + 1 {
         let num = base.pow(i);
@@ -31,11 +38,12 @@ pub fn char_length(base: u32) -> u32 {
 ///
 /// ```
 /// use cat2text::anybase;
+///
 /// let text = "i love cats".to_string();
 /// let base = 10;
 /// let char_length = anybase::char_length(base);
 ///
-/// assert_eq!("", anybase::encode(text, base, char_length));
+/// assert_eq!("meow mewo; mrrp mreow mrrp nyaaaa~ mreow mreow meow nyaaaa~; meow mrow meow mrrp mreow meow mrrp mewo", anybase::encode(text, base, char_length));
 /// ```
 pub fn encode(text: String, base: u32, char_length: u32) -> String {
     let mut shortened_alphabet = alphabet();
@@ -76,6 +84,7 @@ pub fn encode(text: String, base: u32, char_length: u32) -> String {
 ///
 /// ```
 /// use cat2text::anybase;
+///
 /// let text = "meow mewo; mrrp mreow mrrp nyaaaa~ mreow mreow meow nyaaaa~; meow mrow meow mrrp mreow meow mrrp mewo".to_string();
 /// let base = 10;
 /// let char_length = anybase::char_length(base);
@@ -89,7 +98,7 @@ pub fn decode(text: String, base: u32, char_length: u32) -> String {
     shortened_alphabet.truncate(base as usize);
     for engl_word in catspeak_words {
         let mut word = String::new();
-        for engl_letter in core::split_every_x(engl_word, char_length as usize) {
+        for engl_letter in core::split_every_x(engl_word, char_length) {
             let char_num = core::cat_to_num(
                 engl_letter
                     .split(" ")
@@ -108,3 +117,56 @@ pub fn decode(text: String, base: u32, char_length: u32) -> String {
     return output.trim().to_string();
 }
 
+pub mod bytes {
+    use crate::anybase::alphabet;
+    use crate::core;
+    /// Encodes from bytes into catspeak
+    ///
+    /// ```
+    /// use cat2text::anybase::{bytes::encode, char_length};
+    ///
+    /// let bytes = &[9, 1];
+    /// let base = 10;
+    /// let char_length = char_length(base);
+    ///
+    /// assert_eq!("meow mewo meow mrrp", encode(bytes, base, char_length));
+    /// ```
+    pub fn encode(bytes: impl AsRef<[u8]>, base: u32, char_length: u32) -> String {
+        let mut output = String::new();
+        let mut shortened_alphabet = alphabet();
+        shortened_alphabet.truncate(base as usize);
+        for byte in bytes.as_ref() {
+            output += core::num_to_cat(*byte as u32, shortened_alphabet.clone(), char_length).as_str();
+            output += " ";
+        }
+        return output.trim().to_string();
+    }
+
+    /// Decodes catspeak into bytes
+    ///
+    /// ```
+    /// use cat2text::anybase::{bytes::decode, char_length};
+    ///
+    /// let text = "mreow mrrp meow mrrp".to_string();
+    /// let base = 10;
+    /// let char_length = char_length(base);
+    ///
+    /// assert_eq!(
+    ///     vec![21, 1],
+    ///     decode(text, base, char_length)
+    /// );
+    /// ```
+    pub fn decode(text: String, base: u32, char_length: u32) -> Vec<u8> {
+        let mut output: Vec<u8> = Vec::new();
+        let mut shortened_alphabet = alphabet();
+        shortened_alphabet.truncate(base as usize);
+        for byte in core::split_every_x(text.clone(), char_length) {
+            output.push(core::cat_to_num(
+                byte.split(" ").map(|item| item.to_string()).collect(),
+                shortened_alphabet.clone(),
+                char_length,
+            ) as u8);
+        }
+        return output.into();
+    }
+}
