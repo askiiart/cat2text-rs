@@ -4,6 +4,7 @@ version = "0.1.2"
 edition = "2021"
 license = "GPL-3.0-or-later"
 repository = "https://git.askiiart.net/askiiart/cat2text-rs"
+authors = ["askiiart <mail@askiiart.net>"]
 
 [profile.release]
 opt-level = 3
