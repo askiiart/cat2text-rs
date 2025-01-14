@@ -70,13 +70,41 @@ pub fn encode(text: String, base: u32, char_length: u32) -> String {
     return results;
 }
 
+/// Decodes catspeak into text using any base up to [`max_base()`]
+///
+/// `char_length` is set manually, but the minimum can be generated using [`char_length()`]
+///
+/// ```
+/// use cat2text::anybase;
+/// let text = "meow mewo; mrrp mreow mrrp nyaaaa~ mreow mreow meow nyaaaa~; meow mrow meow mrrp mreow meow mrrp mewo".to_string();
+/// let base = 10;
+/// let char_length = anybase::char_length(base);
 
-#[test]
-fn test_anybase_encode() {
-    use crate::anybase;
-    let text = "i love cats".to_string();
-    let base = 10;
-    let char_length = anybase::char_length(base);
-
-    assert_eq!("", anybase::encode(text, base, char_length));
+/// assert_eq!("i love cats", anybase::decode(text, base, char_length));
+/// ```
+pub fn decode(text: String, base: u32, char_length: u32) -> String {
+    let catspeak_words: Vec<String> = text.split("; ").map(|item| item.to_string()).collect();
+    let mut output: String = String::new();
+    let mut shortened_alphabet = alphabet();
+    shortened_alphabet.truncate(base as usize);
+    for engl_word in catspeak_words {
+        let mut word = String::new();
+        for engl_letter in core::split_every_x(engl_word, char_length as usize) {
+            let char_num = core::cat_to_num(
+                engl_letter
+                    .split(" ")
+                    .map(|item| item.to_string())
+                    .collect(),
+                shortened_alphabet.clone(),
+                char_length,
+            );
+            word += String::from_utf8(vec![(char_num + 96) as u8])
+                .unwrap()
+                .as_str();
+        }
+        word += " ";
+        output += word.as_str();
+    }
+    return output.trim().to_string();
 }
+
