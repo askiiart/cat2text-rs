@@ -61,6 +61,7 @@ This currently only supports lowercase text in the latin alphabet without number
 ## TODO
 
 - Add more bases - any base option?
+  - Once this is done, set base 4 as aliases of this
 - Make `core::{cat_to_num, num_to_cat}` usage consistent with each other
 - Improve CLI
 - Add error handling
