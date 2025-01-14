@@ -59,12 +59,11 @@ pub fn encode(text: String) -> String {
 pub fn decode(text: String) -> String {
     let catspeak_words: Vec<String> = text
         .split("; ")
-        .into_iter()
         .map(|item| item.to_string())
         .collect();
     let mut output: String = String::new();
     for engl_word in catspeak_words {
-        let mut word = "".to_string();
+        let mut word = String::new();
         for engl_letter in core::split_every_x(engl_word, 3) {
             let char_num = core::cat_to_num(
                 engl_letter
