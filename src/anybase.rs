@@ -19,7 +19,7 @@ pub fn char_length(base: u32) -> u32 {
     for i in 1..base + 1 {
         let num = base.pow(i);
         if num > 26 {
-            return num;
+            return i;
         }
     }
     return u32::MAX;
