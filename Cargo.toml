@@ -5,6 +5,9 @@ edition = "2021"
 license = "GPL-3.0-or-later"
 repository = "https://git.askiiart.net/askiiart/cat2text-rs"
 
+[profile.release]
+opt-level = 3
+
 [lib]
 name = "cat2text"
 path = "src/lib.rs"
