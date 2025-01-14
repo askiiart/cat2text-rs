@@ -1,3 +1,5 @@
+use std::ops::Deref;
+
 use crate::core;
 
 pub fn alphabet() -> Vec<String> {
@@ -19,7 +21,8 @@ pub fn char_length() -> u32 {
 /// 
 /// assert_eq!("meow mreow mrrp; meow mrow meow meow mrow mrow mrrp mrrp mreow meow mrrp mrrp; meow meow mrow meow meow mrrp mrrp mrrp meow mrrp meow mrow", encode("i love cats".to_string()))
 /// ```
-pub fn encode(text: String) -> String {
+pub fn encode(text: impl AsRef<str>) -> String {
+    let text = text.as_ref();
     // makes it lowercase and split by spaces
     let words: Vec<String> = text
         .to_ascii_lowercase()
@@ -82,4 +85,45 @@ pub fn decode(text: String) -> String {
     }
 
     return output.trim().to_string();
+}
+
+
+pub mod bytes {
+    use crate::core;
+    use crate::base4::alphabet;
+/// Encodes from bytes into catspeak
+/// 
+/// ```
+/// use cat2text::base4::bytes::encode;
+/// 
+/// assert_eq!("meow meow mreow mrrp meow meow meow mrrp", encode(&[9, 1]));
+/// ```
+pub fn encode(bytes: impl AsRef<[u8]>) -> String {
+    let mut output = String::new();
+    for byte in bytes.as_ref() {
+        output += core::num_to_cat(*byte as u32, alphabet(), 4).as_str();
+        output += " ";
+    }
+    return output.trim().to_string();
+}
+
+/// Decodes catspeak into bytes
+///
+/// ```
+/// use cat2text::base4::bytes::decode;
+///
+/// assert_eq!(vec![9, 1], decode("meow meow mreow mrrp meow meow meow mrrp".to_string()));
+/// ```
+pub fn decode(text: String) -> Vec<u8> {
+    let mut output: Vec<u8> = Vec::new();
+    for byte in core::split_every_x(text.clone(), 4) {
+        output.push(core::cat_to_num(
+            byte.split(" ").map(|item| item.to_string()).collect(),
+            alphabet(),
+            4,
+        ) as u8);
+    }
+    return output;
+}
+
 }
