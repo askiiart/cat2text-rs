@@ -50,6 +50,8 @@ let decoded = decode(encoded);
 assert_eq!(decoded, "i love cats");
 ```
 
+You can use the library to encode anything up to base 16 - for details, see the [docs](https://docs.rs/cat2text/latest/cat2text/)
+
 ### Binary usage
 
 TODO
