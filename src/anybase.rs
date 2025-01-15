@@ -118,7 +118,7 @@ pub fn decode(text: String, base: u32, char_length: u32) -> String {
 }
 
 pub mod bytes {
-    use crate::anybase::alphabet;
+    use super::alphabet;
     use crate::core;
     /// Encodes from bytes into catspeak
     ///
