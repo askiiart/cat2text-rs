@@ -1,13 +1,15 @@
+//! This module handles base 4, like the original [Cat2Text](https://github.com/Evelyn3440/Cat2Text); it can translate either english text a-z, or byte arrays (see [`bytes`])
 use crate::core;
 use crate::anybase;
 
+/// Returns the alphabet used by `cat2text::base4`
 pub fn alphabet() -> Vec<String> {
     let mut tmp = core::alphabet();
     tmp.truncate(4);
     return tmp;
 }
 
-/// How many words long a character is when translated to catspeak
+/// How many words long an english character is when translated to catspeak
 pub fn char_length() -> u32 {
     return 3;
 }
@@ -36,6 +38,7 @@ pub fn decode(text: String) -> String {
 }
 
 pub mod bytes {
+    //! This handles encoding and decoding bytes to/from catspeak
     use crate::anybase;
     use super::char_length;
     /// Encodes from bytes into catspeak

@@ -1,3 +1,4 @@
+//! This module translates text 
 use crate::core;
 
 /// Encodes text into catspeak using any base up to [`max_base()`]
