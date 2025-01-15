@@ -45,7 +45,7 @@ pub mod bytes {
     /// assert_eq!("meow meow mreow mrrp meow meow meow mrrp", encode(&[9, 1]));
     /// ```
     pub fn encode(bytes: impl AsRef<[u8]>) -> String {
-        anybase::bytes::encode(bytes, 4, super::char_length())
+        anybase::bytes::encode(bytes, 4, char_length())
     }
 
     /// Decodes catspeak into bytes
@@ -56,7 +56,7 @@ pub mod bytes {
     /// assert_eq!(vec![9, 1], decode("meow meow mreow mrrp meow meow meow mrrp".to_string()));
     /// ```
     pub fn decode(text: String) -> Vec<u8> {
-        anybase::bytes::decode(text, 4, super::char_length())
+        anybase::bytes::decode(text, 4, char_length())
     }
 }
 // ..............d......4..............a.q..a....y..d..w...a............
