@@ -2,10 +2,7 @@
 use cat2text::{self, anybase, core};
 use clap::{CommandFactory, Parser, Subcommand};
 use clap_complete::aot::{generate, Bash, Fish, PowerShell, Zsh};
-use std::{
-    io::stdout,
-    time::Instant,
-};
+use std::{io::stdout, time::Instant};
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
