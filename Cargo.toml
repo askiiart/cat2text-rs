@@ -5,6 +5,8 @@ edition = "2021"
 license = "GPL-3.0-or-later"
 repository = "https://git.askiiart.net/askiiart/cat2text-rs"
 authors = ["askiiart <mail@askiiart.net>"]
+categories = ["encoding"]
+keywords = ["base4", "meow", "base16"]
 
 [profile.release]
 opt-level = 3
