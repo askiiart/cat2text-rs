@@ -1,7 +1,8 @@
+use crate::core;
 use crate::anybase;
 
 pub fn alphabet() -> Vec<String> {
-    let mut tmp = anybase::alphabet();
+    let mut tmp = core::alphabet();
     tmp.truncate(4);
     return tmp;
 }
@@ -59,4 +60,3 @@ pub mod bytes {
         anybase::bytes::decode(text, 4, char_length())
     }
 }
-// ..............d......4..............a.q..a....y..d..w...a............

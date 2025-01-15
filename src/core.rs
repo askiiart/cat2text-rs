@@ -58,14 +58,16 @@ pub fn cat_to_num(text: Vec<String>, alphabet: Vec<String>, char_length: u32) ->
     return num;
 }
 
-/// Splits a cat word into every x segments
+/// Splits a word encoded in catspeak every *x* segments
+/// 
+/// Used for decoding by splitting words apart into letters which can then be decoded individually
 ///
-/// ```
+/// ```ignore
 /// use cat2text::core::split_every_x;
 ///
-/// assert_eq!(vec!["meow meow mrrp".to_string(), "meow mreow mrrp".to_string(), "mreow meow mrrp".to_string()], split_every_x("meow meow mrrp meow mreow mrrp mreow meow mrrp".to_string(), 3));
+/// assert_eq!(vec!["meow meow mrrp".to_string(), "meow mreow mrrp".to_string()], split_every_x("meow meow mrrp meow mreow mrrp".to_string(), 3));
 /// ```
-pub fn split_every_x(text: String, x: u32) -> Vec<String> {
+pub(crate) fn split_every_x(text: String, x: u32) -> Vec<String> {
     let x = x as usize;
     let delim = " ";
     let tmp: Vec<String> = text.split(delim).map(|item| item.to_string()).collect();
@@ -81,4 +83,52 @@ pub fn split_every_x(text: String, x: u32) -> Vec<String> {
     // trim everything before sending it back
     output = output.into_iter().map(|item| item.trim().to_string()).collect();
     return output;
+}
+
+/// Returns all cat sounds in the catspeak alphabet
+/// 
+/// ```
+/// use cat2text::core::alphabet;
+/// 
+/// println!("{:?}", alphabet());
+/// ```
+pub fn alphabet() -> Vec<String> {
+    return vec![
+        "meow", "mrrp", "mreow", "mrow", "nya~", "nyaaaa~", "mraow", "mew", "prrp", "mewo",
+        "purrrr", "nya", "miao", "miau", "miauw", "mrow~"
+    ]
+    .into_iter()
+    .map(|a| a.to_string())
+    .collect();
+}
+
+/// Returns the max base that can be used
+/// 
+/// For example, if the available alphabet was `["meow", "mrrp", "mreow", "mrow"]`, the max base would be 4
+/// 
+/// ```
+/// use cat2text::core::max_base;
+/// 
+/// println!("{}", max_base());
+/// ```
+pub fn max_base() -> u32 {
+    return alphabet().len() as u32;
+}
+
+/// Returns the minimum catspeak words per character needed for this base
+/// 
+/// ```
+/// use cat2text::core::char_length;
+/// 
+/// let base = 10;
+/// assert_eq!(char_length(base), 2)
+/// ```
+pub fn char_length(base: u32) -> u32 {
+    for i in 1..base + 1 {
+        let num = base.pow(i);
+        if num > 26 {
+            return i;
+        }
+    }
+    return u32::MAX;
 }
