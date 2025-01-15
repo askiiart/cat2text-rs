@@ -91,10 +91,10 @@ pub mod bytes {
     /// Encodes from bytes into catspeak
     ///
     /// ```
-    /// use cat2text::{anybase::bytes::encode, core::char_length};
+    /// use cat2text::{anybase::bytes::encode, core::bytes::char_length};
     ///
-    /// let bytes = &[9, 1];
-    /// let base = 10;
+    /// let bytes = &[243];
+    /// let base = 16;
     /// let char_length = char_length(base);
     ///
     /// assert_eq!("meow mewo meow mrrp", encode(bytes, base, char_length));
@@ -114,9 +114,9 @@ pub mod bytes {
     /// Decodes catspeak into bytes
     ///
     /// ```
-    /// use cat2text::{anybase::bytes::decode, core::char_length};
+    /// use cat2text::{anybase::bytes::decode, core::bytes::char_length};
     ///
-    /// let text = "mreow mrrp meow mrrp".to_string();
+    /// let text = "mrrp nyaaaa~ meow".to_string();
     /// let base = 10;
     /// let char_length = char_length(base);
     ///

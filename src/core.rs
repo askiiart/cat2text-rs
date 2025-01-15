@@ -135,3 +135,23 @@ pub fn char_length(base: u32) -> u32 {
     }
     return u32::MAX;
 }
+
+pub mod bytes {
+    /// Returns the minimum catspeak words per character needed for this base for bytes
+    ///
+    /// ```
+    /// use cat2text::core::bytes::char_length;
+    ///
+    /// let base = 16;
+    /// assert_eq!(char_length(base), 2)
+    /// ```
+    pub fn char_length(base: u32) -> u32 {
+        for i in 1..base + 1 {
+            let num = base.pow(i);
+            if num > 255 {
+                return i;
+            }
+        }
+        return u32::MAX;
+    }
+}
