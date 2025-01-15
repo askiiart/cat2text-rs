@@ -58,12 +58,11 @@ TODO
 
 ## Limitations
 
-This currently only supports lowercase text in the latin alphabet without numbers or anything - however, using `cat2text::core`, you can convert anything to meows, as long as you can put it in integers - which, you can.
+This currently only supports lowercase text in the latin alphabet, and byte arrays.
 
 ## TODO
 
-- Add more bases - any base option?
-  - Once this is done, set base 4 as aliases of this
 - Make `core::{cat_to_num, num_to_cat}` usage consistent with each other
 - Improve CLI
 - Add error handling
+- Do `AsRef` stuff
