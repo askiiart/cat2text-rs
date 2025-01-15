@@ -59,7 +59,7 @@ pub fn cat_to_num(text: Vec<String>, alphabet: Vec<String>, char_length: u32) ->
 }
 
 /// Splits a word encoded in catspeak every *x* segments
-/// 
+///
 /// Used for decoding by splitting words apart into letters which can then be decoded individually
 ///
 /// ```ignore
@@ -81,21 +81,24 @@ pub(crate) fn split_every_x(text: String, x: u32) -> Vec<String> {
     }
 
     // trim everything before sending it back
-    output = output.into_iter().map(|item| item.trim().to_string()).collect();
+    output = output
+        .into_iter()
+        .map(|item| item.trim().to_string())
+        .collect();
     return output;
 }
 
 /// Returns all cat sounds in the catspeak alphabet
-/// 
+///
 /// ```
 /// use cat2text::core::alphabet;
-/// 
+///
 /// println!("{:?}", alphabet());
 /// ```
 pub fn alphabet() -> Vec<String> {
     return vec![
         "meow", "mrrp", "mreow", "mrow", "nya~", "nyaaaa~", "mraow", "mew", "prrp", "mewo",
-        "purrrr", "nya", "miao", "miau", "miauw", "mrow~"
+        "purrrr", "nya", "miao", "miau", "miauw", "mrow~",
     ]
     .into_iter()
     .map(|a| a.to_string())
@@ -103,12 +106,12 @@ pub fn alphabet() -> Vec<String> {
 }
 
 /// Returns the max base that can be used
-/// 
+///
 /// For example, if the available alphabet was `["meow", "mrrp", "mreow", "mrow"]`, the max base would be 4
-/// 
+///
 /// ```
 /// use cat2text::core::max_base;
-/// 
+///
 /// println!("{}", max_base());
 /// ```
 pub fn max_base() -> u32 {
@@ -116,10 +119,10 @@ pub fn max_base() -> u32 {
 }
 
 /// Returns the minimum catspeak words per character needed for this base
-/// 
+///
 /// ```
 /// use cat2text::core::char_length;
-/// 
+///
 /// let base = 10;
 /// assert_eq!(char_length(base), 2)
 /// ```

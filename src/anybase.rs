@@ -1,4 +1,4 @@
-//! This module translates text 
+//! This module translates text
 use crate::core;
 
 /// Encodes text into catspeak using any base up to [`max_base()`]
@@ -104,7 +104,8 @@ pub mod bytes {
         let mut shortened_alphabet = core::alphabet();
         shortened_alphabet.truncate(base as usize);
         for byte in bytes.as_ref() {
-            output += core::num_to_cat(*byte as u32, shortened_alphabet.clone(), char_length).as_str();
+            output +=
+                core::num_to_cat(*byte as u32, shortened_alphabet.clone(), char_length).as_str();
             output += " ";
         }
         return output.trim().to_string();

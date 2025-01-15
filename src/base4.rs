@@ -1,6 +1,6 @@
 //! This module handles base 4, like the original [Cat2Text](https://github.com/Evelyn3440/Cat2Text); it can translate either english text a-z, or byte arrays (see [`bytes`])
-use crate::core;
 use crate::anybase;
+use crate::core;
 
 /// Returns the alphabet used by `cat2text::base4`
 pub fn alphabet() -> Vec<String> {
@@ -13,7 +13,6 @@ pub fn alphabet() -> Vec<String> {
 pub fn char_length() -> u32 {
     return 3;
 }
-
 
 /// Encodes english text into base 4 catspeak
 ///
@@ -34,13 +33,13 @@ pub fn encode(text: impl AsRef<str>) -> String {
 /// assert_eq!("i love cats", decode("meow mreow mrrp; meow mrow meow meow mrow mrow mrrp mrrp mreow meow mrrp mrrp; meow meow mrow meow meow mrrp mrrp mrrp meow mrrp meow mrow".to_string()));
 /// ```
 pub fn decode(text: String) -> String {
-    return anybase::decode(text, 4, char_length())
+    return anybase::decode(text, 4, char_length());
 }
 
 pub mod bytes {
     //! This handles encoding and decoding bytes to/from catspeak
-    use crate::anybase;
     use super::char_length;
+    use crate::anybase;
     /// Encodes from bytes into catspeak
     ///
     /// ```
