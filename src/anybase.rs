@@ -93,11 +93,11 @@ pub mod bytes {
     /// ```
     /// use cat2text::{anybase::bytes::encode, core::bytes::char_length};
     ///
-    /// let bytes = &[243];
+    /// let bytes = &[243, 10];
     /// let base = 16;
     /// let char_length = char_length(base);
     ///
-    /// assert_eq!("meow mewo meow mrrp", encode(bytes, base, char_length));
+    /// assert_eq!("mrow~ mrow meow purrrr", encode(bytes, base, char_length));
     /// ```
     pub fn encode(bytes: impl AsRef<[u8]>, base: u32, char_length: u32) -> String {
         let mut output = String::new();
@@ -116,12 +116,12 @@ pub mod bytes {
     /// ```
     /// use cat2text::{anybase::bytes::decode, core::bytes::char_length};
     ///
-    /// let text = "mrrp nyaaaa~ meow".to_string();
-    /// let base = 10;
+    /// let text = "mrow~ mrow meow purrrr".to_string();
+    /// let base = 16;
     /// let char_length = char_length(base);
     ///
     /// assert_eq!(
-    ///     vec![21, 1],
+    ///     vec![243, 10],
     ///     decode(text, base, char_length)
     /// );
     /// ```

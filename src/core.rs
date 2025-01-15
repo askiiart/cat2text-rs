@@ -3,10 +3,10 @@
 /// Converts a [`u32`] to catspeak
 ///
 /// ```
-/// use cat2text::core::num_to_cat;
-/// use cat2text::base4::{alphabet, char_length};
+/// use cat2text::core::{num_to_cat, char_length};
+/// use cat2text::base4::alphabet;
 ///
-/// assert_eq!("meow mreow mrrp".to_string(), num_to_cat(9, alphabet(), char_length()));
+/// assert_eq!("meow mreow mrrp".to_string(), num_to_cat(9, alphabet(), char_length(4)));
 /// ```
 pub fn num_to_cat(num: u32, alphabet: Vec<String>, char_length: u32) -> String {
     let mut num: u32 = num.clone();
@@ -31,12 +31,12 @@ pub fn num_to_cat(num: u32, alphabet: Vec<String>, char_length: u32) -> String {
 /// Converts catspeak to a [`u32`]
 ///
 /// ```
-/// use cat2text::core::cat_to_num;
-/// use cat2text::base4::{alphabet, char_length};
+/// use cat2text::core::{cat_to_num, bytes::char_length};
+/// use cat2text::base4::alphabet;
 ///
-/// let letter = vec!["meow".to_string(), "mreow".to_string(), "mrrp".to_string()];
+/// let text = vec!["meow".to_string(), "mrrp".to_string(), "mrow".to_string(), "meow".to_string()];
 ///
-/// assert_eq!(9, cat_to_num(letter, alphabet(), char_length()));
+/// assert_eq!(28, cat_to_num(text, alphabet(), char_length(4)));
 /// ```
 pub fn cat_to_num(text: Vec<String>, alphabet: Vec<String>, char_length: u32) -> u32 {
     let mut nums: Vec<u32> = Vec::new();

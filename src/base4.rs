@@ -40,7 +40,7 @@ pub mod bytes {
     /// ```
     /// use cat2text::base4::bytes::encode;
     ///
-    /// assert_eq!("meow mreow mrrp meow meow mrrp", encode(&[253..., 1]));
+    /// assert_eq!("mrow mrow mrow mrrp meow meow meow mrrp", encode(&[253, 1]));
     /// ```
     pub fn encode(bytes: impl AsRef<[u8]>) -> String {
         anybase::bytes::encode(bytes, 4, char_length(4))
@@ -51,7 +51,7 @@ pub mod bytes {
     /// ```
     /// use cat2text::base4::bytes::decode;
     ///
-    /// assert_eq!(vec![9, 1], decode("meow mreow mrrp meow meow mrrp".to_string()));
+    /// assert_eq!(vec![253, 1], decode("mrow mrow mrow mrrp meow meow meow mrrp".to_string()));
     /// ```
     pub fn decode(text: String) -> Vec<u8> {
         anybase::bytes::decode(text, 4, char_length(4))
