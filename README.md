@@ -66,3 +66,4 @@ This currently only supports lowercase text in the latin alphabet, and byte arra
 - Improve CLI
 - Add error handling
 - Do `AsRef` stuff
+- Add u16/2-byte encoding in addition to just u8 for greater efficiency
