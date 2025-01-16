@@ -37,7 +37,7 @@ Separating out the letters and words:
 > ]
 > ]
 
-## Usage
+## Library usage
 
 To use the library, just import the relevant functions, and run it like this:
 
@@ -52,9 +52,46 @@ assert_eq!(decoded, "i love cats");
 
 You can use the library to encode anything up to base 16 - for details, see the [docs](https://docs.rs/cat2text/latest/cat2text/)
 
-### Binary usage
+## Binary usage
 
-TODO
+```yaml
+A port of Cat2Text to Rust, with extra functionality, better documentation, and support for using it as a library as well.
+
+Usage: cat2text <COMMAND>
+
+Commands:
+  generate-bash-completions        Generate bash completions
+  generate-zsh-completions         Generate zsh completions
+  generate-fish-completions        Generate fish completions
+  generate-powershell-completions  Generate PowerShell completions,
+  encode                           Encodes text/data to mrow~
+  decode                           Decodes mrow~ to text/data
+  benchmark                        
+  help                             Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help     Print help
+  -V, --version  Print version
+```
+
+For example, `cat2text encode 'i love cats'` to encode `i love cats` in text mode using the default of base 4.
+
+### Encode/decode arguments
+
+- `-b`, `--base` (integer): What base to encode/decode using - up to base 16
+- `--bytes` (flag): Whether to use byte encoding or text encoding
+- `-h`, `--help`: Print help
+
+### Benchmark arguments
+
+- `-b`, `--base` (integer): What base to encode/decode using - up to base 16
+- `-i`, `--iterations`: How many iterations to run each benchmark for
+- `--bytes` (flag): Whether to use byte encoding or text encoding
+- `-h`, `--help`: Print help
+
+### Shell completions
+
+To generate shell completions, you can run `cat2text generate-$(basename $SHELL)-completions | source` on *nix systems using bash, zsh, or fish.
 
 ## Limitations
 
@@ -62,8 +99,6 @@ This currently only supports lowercase text in the latin alphabet, and byte arra
 
 ## TODO
 
-- Make `core::{cat_to_num, num_to_cat}` usage consistent with each other
-- Improve CLI
 - Add error handling
 - Do `AsRef` stuff
 - Optimize code
