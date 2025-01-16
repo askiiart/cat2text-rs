@@ -14,12 +14,12 @@ use crate::core;
 ///
 /// assert_eq!("meow mewo; mrrp mreow mrrp nyaaaa~ mreow mreow meow nyaaaa~; meow mrow meow mrrp mreow meow mrrp mewo", encode(text, base, char_length));
 /// ```
-pub fn encode(text: String, base: u32, char_length: u32) -> String {
+pub fn encode(text: impl AsRef<str>, base: u32, char_length: u32) -> String {
     let mut shortened_alphabet = core::alphabet();
     shortened_alphabet.truncate(base as usize);
 
     // makes it lowercase and split by spaces
-    let words: Vec<String> = text
+    let words: Vec<String> = text.as_ref()
         .to_ascii_lowercase()
         .split(" ")
         .map(|item| return item.to_string())
@@ -60,8 +60,8 @@ pub fn encode(text: String, base: u32, char_length: u32) -> String {
 
 /// assert_eq!("i love cats", decode(text, base, char_length));
 /// ```
-pub fn decode(text: String, base: u32, char_length: u32) -> String {
-    let catspeak_words: Vec<String> = text.split("; ").map(|item| item.to_string()).collect();
+pub fn decode(text: impl AsRef<str>, base: u32, char_length: u32) -> String {
+    let catspeak_words: Vec<String> = text.as_ref().split("; ").map(|item| item.to_string()).collect();
     let mut output: String = String::new();
     let mut shortened_alphabet = core::alphabet();
     shortened_alphabet.truncate(base as usize);
@@ -125,11 +125,11 @@ pub mod bytes {
     ///     decode(text, base, char_length)
     /// );
     /// ```
-    pub fn decode(text: String, base: u32, char_length: u32) -> Vec<u8> {
+    pub fn decode(text: impl AsRef<str>, base: u32, char_length: u32) -> Vec<u8> {
         let mut output: Vec<u8> = Vec::new();
         let mut shortened_alphabet = core::alphabet();
         shortened_alphabet.truncate(base as usize);
-        for byte in core::split_every_x(text.clone(), char_length) {
+        for byte in core::split_every_x(text.as_ref(), char_length) {
             output.push(core::cat_to_num(
                 byte.split(" ").map(|item| item.to_string()).collect(),
                 shortened_alphabet.clone(),

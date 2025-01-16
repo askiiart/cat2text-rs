@@ -67,10 +67,10 @@ pub fn cat_to_num(text: Vec<String>, alphabet: Vec<String>, char_length: u32) ->
 ///
 /// assert_eq!(vec!["meow meow mrrp".to_string(), "meow mreow mrrp".to_string()], split_every_x("meow meow mrrp meow mreow mrrp".to_string(), 3));
 /// ```
-pub(crate) fn split_every_x(text: String, x: u32) -> Vec<String> {
+pub(crate) fn split_every_x(text: impl AsRef<str>, x: u32) -> Vec<String> {
     let x = x as usize;
     let delim = " ";
-    let tmp: Vec<String> = text.split(delim).map(|item| item.to_string()).collect();
+    let tmp: Vec<String> = text.as_ref().split(delim).map(|item| item.to_string()).collect();
     let mut output: Vec<String> = Vec::new();
     for i in 0..tmp.len() {
         if i % x == 0 {

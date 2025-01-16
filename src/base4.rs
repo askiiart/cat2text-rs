@@ -27,7 +27,7 @@ pub fn encode(text: impl AsRef<str>) -> String {
 ///
 /// assert_eq!("i love cats", decode("meow mreow mrrp; meow mrow meow meow mrow mrow mrrp mrrp mreow meow mrrp mrrp; meow meow mrow meow meow mrrp mrrp mrrp meow mrrp meow mrow".to_string()));
 /// ```
-pub fn decode(text: String) -> String {
+pub fn decode(text: impl AsRef<str>) -> String {
     return anybase::decode(text, 4, core::char_length(4));
 }
 
@@ -53,7 +53,7 @@ pub mod bytes {
     ///
     /// assert_eq!(vec![253, 1], decode("mrow mrow mrow mrrp meow meow meow mrrp".to_string()));
     /// ```
-    pub fn decode(text: String) -> Vec<u8> {
+    pub fn decode(text: impl AsRef<str>) -> Vec<u8> {
         anybase::bytes::decode(text, 4, char_length(4))
     }
 }

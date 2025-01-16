@@ -100,5 +100,4 @@ This currently only supports lowercase text in the latin alphabet, and byte arra
 ## TODO
 
 - Add error handling
-- Do `AsRef` stuff
 - Optimize code
