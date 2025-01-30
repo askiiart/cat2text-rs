@@ -70,7 +70,11 @@ pub fn cat_to_num(text: Vec<String>, alphabet: Vec<String>, char_length: u32) ->
 pub(crate) fn split_every_x(text: impl AsRef<str>, x: u32) -> Vec<String> {
     let x = x as usize;
     let delim = " ";
-    let tmp: Vec<String> = text.as_ref().split(delim).map(|item| item.to_string()).collect();
+    let tmp: Vec<String> = text
+        .as_ref()
+        .split(delim)
+        .map(|item| item.to_string())
+        .collect();
     let mut output: Vec<String> = Vec::new();
     for i in 0..tmp.len() {
         if i % x == 0 {

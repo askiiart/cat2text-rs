@@ -1,7 +1,7 @@
 // this is a separate feature for *optional* dependencies to ensure clap doesn't get compiled if you're just using the library
 use cat2text::{self, anybase, core};
 use clap::{CommandFactory, Parser, Subcommand};
-use clap_complete::aot::{generate, Bash, Fish, PowerShell, Zsh};
+use clap_complete::aot::{generate, Bash, Elvish, Fish, PowerShell, Zsh};
 use std::{io::stdout, time::Instant};
 
 #[derive(Parser)]
@@ -13,14 +13,13 @@ pub(crate) struct Cli {
 
 #[derive(Subcommand, Debug)]
 pub(crate) enum Commands {
-    ///Generate bash completions
-    GenerateBashCompletions,
-    ///Generate zsh completions
-    GenerateZshCompletions,
-    ///Generate fish completions
-    GenerateFishCompletions,
-    ///Generate PowerShell completions,
-    GeneratePowershellCompletions,
+    ///Generate shell completions
+    GenCompletion {
+        #[command(subcommand)]
+        shell: ShellCommands,
+        #[arg(short, long, default_value = "cat2text")]
+        binary_name: String,
+    },
     ///Encodes text/data to mrow~
     ///
     ///The default is base 4 text encoding, to match the original program, but it can encode either text or binary data in up to base 16 meows :3
@@ -63,33 +62,23 @@ pub(crate) fn run() {
     let cli = Cli::parse();
 
     match cli.command {
-        Commands::GenerateBashCompletions => {
-            generate(
-                Bash,
-                &mut Cli::command(),
-                clap::crate_name!(),
-                &mut stdout(),
-            );
-        }
-        Commands::GenerateZshCompletions => {
-            generate(Zsh, &mut Cli::command(), clap::crate_name!(), &mut stdout());
-        }
-        Commands::GenerateFishCompletions => {
-            generate(
-                Fish,
-                &mut Cli::command(),
-                clap::crate_name!(),
-                &mut stdout(),
-            );
-        }
-        Commands::GeneratePowershellCompletions => {
-            generate(
-                PowerShell,
-                &mut Cli::command(),
-                clap::crate_name!(),
-                &mut stdout(),
-            );
-        }
+        Commands::GenCompletion { shell, binary_name } => match shell {
+            ShellCommands::Bash => {
+                generate(Bash, &mut Cli::command(), binary_name, &mut stdout());
+            }
+            ShellCommands::Zsh => {
+                generate(Zsh, &mut Cli::command(), binary_name, &mut stdout());
+            }
+            ShellCommands::Fish => {
+                generate(Fish, &mut Cli::command(), binary_name, &mut stdout());
+            }
+            ShellCommands::Elvish => {
+                generate(Elvish, &mut Cli::command(), binary_name, &mut stdout());
+            }
+            ShellCommands::Powershell => {
+                generate(PowerShell, &mut Cli::command(), binary_name, &mut stdout());
+            }
+        },
         Commands::Encode { base, text, bytes } => {
             println!("{}", encode(base, text, bytes))
         }
@@ -159,4 +148,13 @@ fn decode(base: u8, text: String, bytes: bool) -> String {
             return anybase::decode(text, base as u32, core::char_length(base as u32));
         }
     }
+}
+
+#[derive(Subcommand, Debug)]
+pub enum ShellCommands {
+    Bash,
+    Zsh,
+    Fish,
+    Elvish,
+    Powershell,
 }

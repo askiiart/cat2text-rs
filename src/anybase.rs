@@ -19,7 +19,8 @@ pub fn encode(text: impl AsRef<str>, base: u32, char_length: u32) -> String {
     shortened_alphabet.truncate(base as usize);
 
     // makes it lowercase and split by spaces
-    let words: Vec<String> = text.as_ref()
+    let words: Vec<String> = text
+        .as_ref()
         .to_ascii_lowercase()
         .split(" ")
         .map(|item| return item.to_string())
@@ -61,7 +62,11 @@ pub fn encode(text: impl AsRef<str>, base: u32, char_length: u32) -> String {
 /// assert_eq!("i love cats", decode(text, base, char_length));
 /// ```
 pub fn decode(text: impl AsRef<str>, base: u32, char_length: u32) -> String {
-    let catspeak_words: Vec<String> = text.as_ref().split("; ").map(|item| item.to_string()).collect();
+    let catspeak_words: Vec<String> = text
+        .as_ref()
+        .split("; ")
+        .map(|item| item.to_string())
+        .collect();
     let mut output: String = String::new();
     let mut shortened_alphabet = core::alphabet();
     shortened_alphabet.truncate(base as usize);

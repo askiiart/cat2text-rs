@@ -50,6 +50,18 @@ let decoded = decode(encoded);
 assert_eq!(decoded, "i love cats");
 ```
 
+Or to encode binary in cat2text's expanded base16 alphabet:
+
+```rust
+use cat2text::{anybase::bytes::encode, core::bytes::char_length};
+
+let bytes = &[243, 10];
+let base = 16;
+let char_length = char_length(base);
+
+assert_eq!("mrow~ mrow meow purrrr", encode(bytes, base, char_length));
+```
+
 You can use the library to encode anything up to base 16 - for details, see the [docs](https://docs.rs/cat2text/latest/cat2text/)
 
 ## Binary usage
@@ -92,12 +104,3 @@ For example, `cat2text encode 'i love cats'` to encode `i love cats` in text mod
 ### Shell completions
 
 To generate shell completions, you can run `cat2text generate-$(basename $SHELL)-completions | source` on *nix systems using bash, zsh, or fish.
-
-## Limitations
-
-This currently only supports lowercase text in the latin alphabet, and byte arrays.
-
-## TODO
-
-- Add error handling
-- Optimize code
