@@ -72,14 +72,11 @@ A port of Cat2Text to Rust, with extra functionality, better documentation, and 
 Usage: cat2text <COMMAND>
 
 Commands:
-  generate-bash-completions        Generate bash completions
-  generate-zsh-completions         Generate zsh completions
-  generate-fish-completions        Generate fish completions
-  generate-powershell-completions  Generate PowerShell completions,
-  encode                           Encodes text/data to mrow~
-  decode                           Decodes mrow~ to text/data
-  benchmark                        
-  help                             Print this message or the help of the given subcommand(s)
+  gen-completion  Generate shell completions
+  encode          Encodes text/data to mrow~
+  decode          Decodes mrow~ to text/data
+  benchmark       
+  help            Print this message or the help of the given subcommand(s)
 
 Options:
   -h, --help     Print help
@@ -103,4 +100,4 @@ For example, `cat2text encode 'i love cats'` to encode `i love cats` in text mod
 
 ### Shell completions
 
-To generate shell completions, you can run `cat2text generate-$(basename $SHELL)-completions | source` on *nix systems using bash, zsh, or fish.
+To generate shell completions, you can run `cat2text gen-completion $(basename $SHELL) | source` on *nix systems using bash, zsh, or fish.
