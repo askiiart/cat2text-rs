@@ -54,7 +54,7 @@ dependencies = [
 
 [[package]]
 name = "cat2text"
-version = "0.1.3"
+version = "1.0.0"
 dependencies = [
  "clap",
  "clap_complete",

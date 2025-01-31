@@ -1,6 +1,6 @@
 [package]
 name = "cat2text"
-version = "0.1.3"
+version = "1.0.0"
 edition = "2021"
 license = "GPL-3.0-or-later"
 description = "A port of Cat2Text to Rust, with extra functionality, better documentation, and support for using it as a library as well."
