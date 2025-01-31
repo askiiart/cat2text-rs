@@ -1,11 +1,11 @@
 [package]
 name = "cat2text"
-version = "1.0.0"
+version = "1.0.1"
 edition = "2021"
 license = "GPL-3.0-or-later"
 description = "A port of Cat2Text to Rust, with extra functionality, better documentation, and support for using it as a library as well."
 readme = "README.md"
-repository = "https://git.askiiart.net/askiiart/cat2text-rs"
+repository = "https://github.com/askiiart/cat2text-rs"
 authors = ["askiiart <mail@askiiart.net>"]
 categories = ["encoding"]
 keywords = ["base4", "meow", "base16"]
