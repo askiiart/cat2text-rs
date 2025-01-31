@@ -44,6 +44,7 @@ pub(crate) enum Commands {
         bytes: bool,
         text: String,
     },
+    ///Benchmark cat2text-rs
     Benchmark {
         ///What base to benchmark using - up to base 16
         #[arg(short, long, default_value_t = 4)]

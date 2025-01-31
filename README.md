@@ -39,7 +39,13 @@ Separating out the letters and words:
 
 ## Library usage
 
-To use the library, just import the relevant functions, and run it like this:
+To use the library, first off add it as a dependency:
+
+```sh
+cargo add cat2text
+```
+
+Then just import the relevant functions, and run it like this:
 
 ```rust
 use cat2text::base4::{encode, decode};
@@ -66,6 +72,14 @@ You can use the library to encode anything up to base 16 - for details, see the 
 
 ## Binary usage
 
+To install cat2text, just run the following:
+
+```sh
+cargo install cat2text
+```
+
+**Usage**:
+
 ```yaml
 A port of Cat2Text to Rust, with extra functionality, better documentation, and support for using it as a library as well.
 
@@ -75,7 +89,7 @@ Commands:
   gen-completion  Generate shell completions
   encode          Encodes text/data to mrow~
   decode          Decodes mrow~ to text/data
-  benchmark       
+  benchmark       Benchmark cat2text-rs
   help            Print this message or the help of the given subcommand(s)
 
 Options:
@@ -87,15 +101,15 @@ For example, `cat2text encode 'i love cats'` to encode `i love cats` in text mod
 
 ### Encode/decode arguments
 
-- `-b`, `--base` (integer): What base to encode/decode using - up to base 16
+- `-b`, `--base` (int): What base to encode/decode using - up to base 16
 - `--bytes` (flag): Whether to use byte encoding or text encoding
 - `-h`, `--help`: Print help
 
 ### Benchmark arguments
 
 - `-b`, `--base` (integer): What base to encode/decode using - up to base 16
-- `-i`, `--iterations`: How many iterations to run each benchmark for
 - `--bytes` (flag): Whether to use byte encoding or text encoding
+- `-i`, `--iterations` (int): How many iterations to run each benchmark for
 - `-h`, `--help`: Print help
 
 ### Shell completions
